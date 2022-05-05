@@ -11,7 +11,6 @@ const FIRST_DAY_SUMMER = 5 * 30 + 21;
 const FIRST_DAY_AUTUMN = 8 * 30 + 21;
 // primero de invierno
 const FIRST_DAY_WINTER = 11 * 30 + 21;
-
 do {
     day = console.readNumber(`Escriba un día (1-30):`);
 } while (day < 1 || day > 30);
@@ -23,66 +22,48 @@ do {
 } while (year < 1);
 let msg = `El día ${day} del ${month} de ${year} cae a `;
 let msgSeason = ``;
+let firstDate = 0;
+let msgPeriod = ``;
 let dayOfYear = day + (month - 1) * 30;
 console.writeln(dayOfYear);
 
-
 if (dayOfYear >= FIRST_DAY_SPRING && dayOfYear < FIRST_DAY_SUMMER) {
-    console.writeln(FIRST_DAY_SPRING);
-    const distance = dayOfYear - FIRST_DAY_SPRING;
-    if (distance <= 30) {
-        msgSeason = ` primeros de `;
-    }
-    else{
-        if (distance < 60){
-            msgSeason = ` mediados de `;
-        }
-        else{
-            msgSeason = ` finales de `;
-        }
-    }
+    firstDate = FIRST_DAY_SPRING;
     msgSeason += `primavera`;
 }
 else {
     if (dayOfYear >= FIRST_DAY_SUMMER && dayOfYear < FIRST_DAY_AUTUMN) {
-        console.writeln(FIRST_DAY_SUMMER);
-        const distance = dayOfYear - FIRST_DAY_SUMMER;
-        if (distance <= 30) {
-            msgSeason = ` primeros de `;
-        }
-        else{
-            if (distance < 60){
-                msgSeason = ` mediados de `;
-            }
-            else{
-                msgSeason = ` finales de `;
-            }
-        }
+        firstDate = FIRST_DAY_SUMMER;
         msgSeason += `verano`;
     }
-}
-
-/*
-if (dayOfYear < FIRST_DAY_SPRING || dayOfYear >= FIRST_DAY_WINTER) {
-    msgSeason += `invierno`;
-}
-else {
-    if (dayOfYear < FIRST_DAY_SUMMER) {
-        if (dayOfYear)
-        msgSeason += `primavera`;
-
-    }
     else {
-        if (dayOfYear < FIRST_DAY_AUTUMN) {
-            msgSeason += `verano`;
-        }
-        else {
+        if (dayOfYear >= FIRST_DAY_AUTUMN && dayOfYear < FIRST_DAY_WINTER) {
+            firstDate = FIRST_DAY_AUTUMN;
             msgSeason += `otoño`;
         }
+        else {
+            msgSeason += `invierno`;
+            if (dayOfYear >= FIRST_DAY_WINTER) {
+                msgPeriod = ` primeros de `;
+            }
+        }
     }
 }
-*/
-msg += msgSeason;
-
+if (msgPeriod === ``) {
+    let period  = (dayOfYear - firstDate) / 30;
+    if (period < 1){
+        msgPeriod = `primeros de `;
+    }
+    else 
+    {
+        if (period < 2) {
+            msgPeriod = `mediados de `;
+        }
+        else{
+            msgPeriod = `finales de `;
+        }
+    }
+}
+msg += msgPeriod + msgSeason;
 console.writeln(`${msg}`);
 
