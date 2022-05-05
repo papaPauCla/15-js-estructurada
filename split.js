@@ -35,4 +35,4 @@ for (let i = 0; i < numOfIntervals; i++) {
         }
     }
 }
-console.writeln(msg);
+console.writeln(`${msg}`);
