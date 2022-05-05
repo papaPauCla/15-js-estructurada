@@ -51,15 +51,15 @@ else {
 }
 if (msgPeriod === ``) {
     let period  = (dayOfYear - firstDate) / 30;
-    if (period < 1){
+    if (period < 1) {
         msgPeriod = `primeros de `;
     }
-    else 
+    else
     {
         if (period < 2) {
             msgPeriod = `mediados de `;
         }
-        else{
+        else {
             msgPeriod = `finales de `;
         }
     }
