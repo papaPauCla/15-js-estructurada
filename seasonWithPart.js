@@ -43,7 +43,7 @@ if (dayOfYear >= FIRST_DAY_SPRING && dayOfYear < FIRST_DAY_SUMMER) {
     }
     msgSeason += `primavera`;
 }
-else{
+else {
     if (dayOfYear >= FIRST_DAY_SUMMER && dayOfYear < FIRST_DAY_AUTUMN) {
         console.writeln(FIRST_DAY_SUMMER);
         const distance = dayOfYear - FIRST_DAY_SUMMER;
@@ -60,7 +60,7 @@ else{
         }
         msgSeason += `verano`;
     }
-    
+}
 
 /*
 if (dayOfYear < FIRST_DAY_SPRING || dayOfYear >= FIRST_DAY_WINTER) {
