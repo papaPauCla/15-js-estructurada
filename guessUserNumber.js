@@ -11,11 +11,11 @@ do {
     } while (response != `s` && response != `n`);
     if (response === `s`) {
         minNumber = possibleNumber;
-        possibleNumber = ~~(minNumber + (maxNumber - minNumber) / 2);
+        possibleNumber = minNumber + (maxNumber - minNumber) / 2;
     }
     else {
         maxNumber = possibleNumber;
-        possibleNumber = ~~(maxNumber - (maxNumber - minNumber) / 2);
+        possibleNumber = maxNumber - (maxNumber - minNumber) / 2;
     }
     console.writeln(`${minNumber} - ${maxNumber}`);
 
