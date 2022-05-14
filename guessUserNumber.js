@@ -13,13 +13,14 @@ do {
     if (response === `+`) {
         minNumber = userNumber + 1;
     }
-    else{
-        maxNumber = userNumber - 1;
+    else {
+        if (response === `-`) {
+            maxNumber = userNumber - 1;
+        }
     }
     if (minNumber === maxNumber) {
         response = `*`;
         userNumber = minNumber;
     }
-
-} while (response != `*`);
+} while (response != `*` && minNumber != maxNumber);
 console.writeln(`Tú número es ${userNumber} !!!`);
