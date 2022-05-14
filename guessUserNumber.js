@@ -3,21 +3,23 @@ const console = new Console();
 
 let minNumber = 0;
 let maxNumber = 1000000;
-let  possibleNumber = (minNumber + maxNumber) / 2;
+let  userNumber;
+let response;
 do {
-    let response = ``;
+    userNumber = ((minNumber + maxNumber) - ((minNumber + maxNumber) % 2)) / 2;
     do {
-      response = console.readString(`El número que has pensado es igual o mayor que ${possibleNumber}? (s/n) `);
-    } while (response != `s` && response != `n`);
-    if (response === `s`) {
-        minNumber = possibleNumber;
-        possibleNumber = minNumber + (maxNumber - minNumber) / 2;
+      response = console.readString(`El número que has pensado es mayor (+), igual (*) o menor (-) que ${userNumber}? `);
+    } while (response != `+` && response != `-` && response != `*`);
+    if (response === `+`) {
+        minNumber = userNumber + 1;
     }
-    else {
-        maxNumber = possibleNumber;
-        possibleNumber = maxNumber - (maxNumber - minNumber) / 2;
+    else{
+        maxNumber = userNumber - 1;
     }
-    console.writeln(`${minNumber} - ${maxNumber}`);
+    if (minNumber === maxNumber) {
+        response = `*`;
+        userNumber = minNumber;
+    }
 
-} while (minNumber != maxNumber);
-console.writeln(`Tú número es : ${minNumber} !!!`);
+} while (response != `*`);
+console.writeln(`Tú número es ${userNumber} !!!`);
