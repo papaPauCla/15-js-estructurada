@@ -1,6 +1,7 @@
 const { Console } = require("console-mpds");
 const console = new Console();
 
+const FIRST_DAY_SPRING = 1;
 const FIRST_DAY_SUMMER = 91;
 const FIRST_DAY_AUTUMN = 181;
 const FIRST_DAY_WINTER = 271;
@@ -13,32 +14,30 @@ do {
     month = console.readNumber(`Escriba un mes (1-12):`);
 } while (month < 1 || month > 12);
 let msg = `El día ${day} del ${month} cae a `;
-month--;
-let myDayOfYear = (day + month * 30);
-myDayOfYear = myDayOfYear > 80 ? myDayOfYear - 80 : myDayOfYear + 280;
-let season;
+let dayOfYearStartingSpring = (day + (month - 1) * 30);
+dayOfYearStartingSpring = dayOfYearStartingSpring > 80 ? dayOfYearStartingSpring - 81 : dayOfYearStartingSpring + 279;
+let season = (dayOfYearStartingSpring - (dayOfYearStartingSpring % 90)) / 90;
 let firstDaySeason;
-if (myDayOfYear >= FIRST_DAY_WINTER) {
-    season = 'invierno';
-    firstDaySeason = FIRST_DAY_WINTER;
-}
-else{
-    if (myDayOfYear >= FIRST_DAY_AUTUMN) {
-        season = 'otoño';
+let msgSeason;
+switch (season) {
+    case 0:
+        firstDaySeason = FIRST_DAY_SPRING;
+        msgSeason = `primavera`;
+        break;
+    case 1:
+        firstDaySeason = FIRST_DAY_SUMMER;
+        msgSeason = `verano`;
+        break;
+    case 2:
         firstDaySeason = FIRST_DAY_AUTUMN;
-    }
-    else{
-        if (myDayOfYear >= FIRST_DAY_SUMMER) {
-            season = 'verano';
-            firstDaySeason = FIRST_DAY_SUMMER;
-        }
-        else{
-            season = 'primavera';
-            firstDaySeason = 1;
-        }
-    }
+        msgSeason = `otoño`;
+        break;
+    case 3:
+        firstDaySeason = FIRST_DAY_WINTER;
+        msgSeason = `invierno`;
+        break;
 }
-let strecht = ((myDayOfYear - firstDaySeason) -  (myDayOfYear - firstDaySeason) % 30)/ 30;
+let strecht = ((dayOfYearStartingSpring - firstDaySeason) -  (dayOfYearStartingSpring - firstDaySeason) % 30)/ 30;
 switch(strecht){
     case 0:
         msg += `primeros de `;
@@ -50,6 +49,6 @@ switch(strecht){
         msg += `últimos de `;
         break;
 }
-msg += `${season}`;
+msg += `${msgSeason}`;
 console.writeln(`${msg}`);
 
