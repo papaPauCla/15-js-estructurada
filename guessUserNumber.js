@@ -10,17 +10,18 @@ do {
     do {
       response = console.readString(`El número que has pensado es mayor (+), igual (*) o menor (-) que ${userNumber}? `);
     } while (response != `+` && response != `-` && response != `*`);
-    if (response === `+`) {
-        minNumber = userNumber + 1;
-    }
-    else {
-        if (response === `-`) {
+    switch(response)
+    {
+        case `+`:
+            minNumber = userNumber + 1;
+            break;
+        case `-`:
             maxNumber = userNumber - 1;
-        }
+            break;
     }
-    if (minNumber === maxNumber) {
+    if (minNumber === maxNumber){
         response = `*`;
         userNumber = minNumber;
     }
-} while (response != `*` && minNumber != maxNumber);
+} while (response != `*`);
 console.writeln(`Tú número es ${userNumber} !!!`);
