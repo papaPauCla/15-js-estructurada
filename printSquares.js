@@ -1,20 +1,16 @@
-const { Console } = require("console-mpds");
+const { Console } = require(`console-mpds`);
 const console = new Console();
+
 const SIZE_OF_SIDE = 5;
-const rows = console.readNumber("Escribe el número de filas: ");
-const columns = console.readNumber("Escribe el número de columnas: ");
-let isTopOrBottomRow;
-let isBorderPosition;
-for (let i = 0; i < rows * SIZE_OF_SIDE; i++) {
-    isTopOrBottomRow = i % SIZE_OF_SIDE === 0 || i % SIZE_OF_SIDE === SIZE_OF_SIDE - 1;
-    for (let j = 0; j < columns * SIZE_OF_SIDE; j++) {
-        if (isTopOrBottomRow) {
-            console.write(` * `);
-        }
-        else{
-            isBorderPosition =  isTopOrBottomRow || j % SIZE_OF_SIDE === 0 || j % SIZE_OF_SIDE === SIZE_OF_SIDE - 1;
-            console.write(`${isBorderPosition ? ` * ` : ` · `}`);
-        }
+const BORDER_CHARACTER = ` * `;
+const INTERIOR_CHARACTER = ` · `;
+const rows = console.readNumber(`Escribe el número de filas: `);
+const columns = console.readNumber(`Escribe el número de columnas: `);
+for (let i = 0; i <  SIZE_OF_SIDE * rows - (rows - 1); i++) {
+    let isTopOrBottomRow = i % (SIZE_OF_SIDE - 1) === 0;
+    for (let j = 0; j < SIZE_OF_SIDE * columns - (columns - 1); j++) {
+        let isAsterisk = isTopOrBottomRow || j % (SIZE_OF_SIDE - 1) === 0;
+        console.write(isAsterisk ? BORDER_CHARACTER : INTERIOR_CHARACTER);
     }
     console.writeln();
 }
